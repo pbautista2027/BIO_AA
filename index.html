@@ -3,9 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Which Sperm will Egg Cell!</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+        }
+        canvas {
+            margin-top: 20px;
+            border: 2px solid black;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+        }
+        .controls {
+            margin-bottom: 20px;
+        }
+    </style>
 </head>
 <body>
-    <p style="font-size: 15px;">Opens at 4:30</p>
+    <!--
+    <div class="controls">
+        <input type="number" id="playerInput" placeholder="Enter Player ID (1 or 2)">
+        <input type="number" id="positionInput" placeholder="Enter position (1-100)">
+        <button onclick="setPlayerPosition(
+            parseInt(document.getElementById('playerInput').value), 
+            parseInt(document.getElementById('positionInput').value)
+        )">Set Player Position</button>
+    </div>
+    -->
+    <h1>Which Sperm will Egg Cell!</h1>
+    <canvas id="gameCanvas" width="750" height="750"></canvas>
+    <br>
+    <button id="rollDice">Roll Dice</button>
+    <p id="diceResult">Roll a dice to start!</p>
 </body>
+<script src="index.js"></script>
 </html>
