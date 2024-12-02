@@ -40,9 +40,11 @@ const cellBackgrounds = [
 ;
 
 const players = [
-    { position: playerPosition, image: new Image(), id: 1, shieldActive: false, doubleRoll: false }
+    { position: playerPosition, image: new Image(), id: 1, shieldActive: false, doubleRoll: false },
+    { position: playerPosition, image: new Image(), id: 2, shieldActive: false, doubleRoll: false }
 ];
 players[0].image.src = "Assets/sperm.png"; // Replace with player 1's image
+players[1].image.src = "Assets/sperm.png"; // Replace with player 1's image
 
 
 let currentPlayerIndex = 0; // Track whose turn it is
