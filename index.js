@@ -297,6 +297,51 @@ function rollDiceWithOverlay(callback) {
 var isRolling = false;
 // Example of integrating with the game logic
 // Roll the dice function (updated to handle double roll)
+// Listen for the spacebar keypress to roll the dice
+document.addEventListener("keydown", (event) => {
+    if (event.code === "Space" && !isRolling) {
+        diceResult.textContent = "Rolling...";
+        isRolling = true;
+        rollDiceWithOverlay((finalRoll) => {
+            isRolling = false;
+
+            // Get the current player
+            const currentPlayer = players[currentPlayerIndex];
+
+            // Handle double roll
+            let rollValue = finalRoll;
+            if (currentPlayer.doubleRoll) {
+                rollValue *= 2;
+                currentPlayer.doubleRoll = false; // Reset double roll
+                console.log(`Player ${currentPlayer.id}: Double roll applied! Roll: ${rollValue}`);
+            }
+
+            diceResult.textContent = `Player ${currentPlayer.id} rolled a ${rollValue}!`;
+
+            // Update player position
+            currentPlayer.position += rollValue;
+
+            // Check if the player reached or exceeded the end
+            if (currentPlayer.position >= gridSize * gridSize) {
+                currentPlayer.position = gridSize * gridSize;
+                diceResult.textContent += ` Player ${currentPlayer.id} wins!`;
+                displayBaby();
+                rollDiceButton.disabled = true; // End the game
+            } else {
+                // Check for snakes, ladders, power-ups, or debuffs
+                currentPlayer.position = checkForSnakesAndLadders(currentPlayer);
+            }
+
+            // Redraw the board with updated player positions
+            drawBoard();
+
+            // Switch to the next player's turn
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+        });
+    }
+});
+
+
 rollDiceButton.addEventListener("click", () => {
     diceResult.textContent = "Rolling...";
     if (!isRolling) {
